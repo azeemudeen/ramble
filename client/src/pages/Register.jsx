@@ -63,7 +63,7 @@ function Register() {
       isvalid = false;
     }
     if (password.length < 3) {
-      errormsgs.push("Password should be equal or greater then 8 characters", toastOptions);
+      errormsgs.push("Password should be equal or greater then 3 characters", toastOptions);
       isvalid = false;
     }
     if (email === "") {
