@@ -109,10 +109,10 @@ const Container = styled.div`
   }
   .chat-header {
     display: flex;
-    background-color: blue;
+    background-color: #080420;
     justify-content: space-between;
     align-items: center;
-    padding: 2.5rem 2rem;
+    padding: 2rem 2rem;
     .user-details {
       display: flex;
       align-items: center;
