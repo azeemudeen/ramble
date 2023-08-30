@@ -16,6 +16,8 @@ function Register() {
     confirmPassword: "",
   });
 
+  const [isRegisterBtnDisabled, setRegisterBtnDisabled] = useState(false);
+  
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -32,6 +34,7 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setRegisterBtnDisabled(true);
     if (handleValidation()) {
       const { password, confirmPassword, email, username } = values;
       const { data } = await axios.post(registerRoute, {
@@ -48,6 +51,7 @@ function Register() {
         navigate("/");
       }
     }
+    setRegisterBtnDisabled(false);
   };
 
   const handleValidation = () => {
@@ -112,7 +116,7 @@ function Register() {
             name='confirmPassword'
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Create User</button>
+          <button type="submit" disabled={isRegisterBtnDisabled}>{!isRegisterBtnDisabled? "Create User":"Loading.."}</button>
           <span>
             Already have an account?
             <Link to="/login"> Login</Link>
@@ -139,7 +143,7 @@ const FormContainer = styled.div`
     gap: 1rem;
     justify-content: center;
     img {
-      height: 5rem;
+      height: 4rem;
     }
     h1 {
       color: white;
@@ -150,10 +154,13 @@ const FormContainer = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     background-color: #00000076;
     border-radius: 2rem;
-    padding: 3rem 5rem;
+    padding: 3rem 4rem;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow : 5px 5px #4e0eff;
   }
   input {
     background-color: transparent;

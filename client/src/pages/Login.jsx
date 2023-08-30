@@ -15,6 +15,8 @@ function Login() {
     username: "",
     password: "",
   });
+  
+  const [isLoginBtnDisabled, setLoginBtnDisabled] = useState(false);
 
   const toastOptions = {
     position: "bottom-right",
@@ -32,6 +34,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoginBtnDisabled(true);
     if (handleValidation()) {
       const { password, username } = values;
       const { data } = await axios.post(loginRoute, {
@@ -47,6 +50,7 @@ function Login() {
         navigate("/");
       }
     }
+    setLoginBtnDisabled(false);
   };
 
   const handleValidation = () => {
@@ -93,7 +97,7 @@ function Login() {
             name='password'
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Login</button>
+          <button type="submit" disabled={isLoginBtnDisabled}>{!isLoginBtnDisabled? "Login":"Loading.."}</button>
           <span>
             Don't have an account?
             <Link to="/register"> Register</Link>
@@ -120,7 +124,7 @@ const FormContainer = styled.div`
     gap: 1rem;
     justify-content: center;
     img {
-      height: 5rem;
+      height: 4rem;
     }
     h1 {
       color: white;
@@ -134,7 +138,10 @@ const FormContainer = styled.div`
     gap: 2rem;
     background-color: #00000076;
     border-radius: 2rem;
-    padding: 5rem;
+    padding: 3rem 4rem;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow : 5px 5px #4e0eff;
   }
   input {
     background-color: transparent;
